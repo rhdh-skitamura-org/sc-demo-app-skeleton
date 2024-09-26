@@ -3,30 +3,50 @@ name: Commit and Push Changes
 on:
   workflow_dispatch:
 
+permissions:
+  actions: write
+  checks: write
+  contents: write
+
 jobs:
-  update-index:
+  trigger-ci:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v3
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
       with:
-        node-version: 'latest'
+        ref: 'main'
 
-    - name: Modify index.ts
+    - name: Commit and push if changed
       run: |
-        sed -i 's/Hello World!/Hello World!!!!!/g' app/src/index.ts
-      
-    - name: Commit changes
-      run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git add app/src/index.ts
-        git commit -m "Updated greeting message in index.ts"
-      
-    - name: Push changes
-      run: |
-        git push origin HEAD:main
+        git config user.email "action@github.com"
+        git config user.name "actions-user"
+        git commit --allow-empty -m "Trigger Tekton CI" 
+        git push origin main
+#  update-index:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v3
+#      
+#    - name: Set up Node.js
+#      uses: actions/setup-node@v4
+#      with:
+#        node-version: 'latest'
+#
+#    - name: Modify index.ts
+#      run: |
+#        sed -i 's/Hello World!/Hello World!!!!!/g' app/src/index.ts
+#      
+#    - name: Commit changes
+#      run: |
+#        git config --global user.name 'GitHub Actions'
+#        git config --global user.email 'actions@github.com'
+#        git add app/src/index.ts
+#        git commit -m "Updated greeting message in index.ts"
+#      
+#    - name: Push changes
+#      run: |
+#        git push origin HEAD:main
+
