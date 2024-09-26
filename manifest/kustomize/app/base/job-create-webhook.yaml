@@ -25,7 +25,7 @@ spec:
       volumes:
       - name: script-vol
         configMap:
-          name: webhook-playbook
+          name: ${{ values.app_name }}-webhook-playbook
       - name: webhook
         secret:
           secretName: ${{ values.git }}-webhook
