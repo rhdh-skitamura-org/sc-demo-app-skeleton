@@ -1,4 +1,4 @@
-apiVersion: scaffolder.backstage.io/v1beta3
+piVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: summit-connect-app-template
@@ -76,7 +76,7 @@ spec:
       name: Registering the Catalog Info Component to GitHub
       action: catalog:register
       input:
-        repoContentsUrl: ${{ steps['publish-app-to-github'].output.repoContentsUrl }}
+        repoContentsUrl: ${{ steps['publish-app'].output.repoContentsUrl }}
         catalogInfoPath: "/catalog-info.yaml"
 
     - id: create-argocd-resources
@@ -92,7 +92,7 @@ spec:
   output:
     links:
       - title: Open the Source Code Repository
-        url: ${{ steps['publish-app-to-github'].output.remoteUrl }}
+        url: ${{ steps['publish-app'].output.remoteUrl }}
       - title: Open the Catalog Info Component
         icon: catalog
         entityRef: ${{ steps['register-to-github'].output.entityRef }}
