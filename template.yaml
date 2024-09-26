@@ -1,0 +1,98 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: summit-connect-app-template
+  title: Summit Connect Demo Application
+  description: Provides the sample code and deploy a sample application on OpenShift. 
+  tags:
+    - recommended
+spec:
+  owner: user:default/skitamura7446
+  type: service
+
+  parameters:
+    - title: セキュリティの問題に回答してアプリをデプロイしてみよう！
+      required:
+        - app_name
+        - answer_1
+        - answer_2
+      properties:
+        app_name:
+          title: あなたのニックネームを入力してください。
+          type: string
+          default: "redhat-taro"
+        answer_1:
+          title: 【問題１】ほげほげ
+          type: string
+          enum:
+            - innerloop
+            - outerloop
+          enumNames:
+            - Inner Loop
+            - Outer Loop
+        answer_2:
+          title: 【問題２】ほげほげ
+          type: string
+          enum:
+            - innerloop
+            - outerloop
+          enumNames:
+            - Inner Loop
+            - Outer Loop
+      
+  steps:
+    - id: app-template
+      name: Generating the Application Source Code Component
+      action: fetch:template
+      input:
+        url: ./
+        copyWithoutTemplating:
+          - .github/workflows/
+        values:
+          namespace: "sc-demo"
+          git: "github"
+          git_host_url: "github.com"
+          git_owner_name: "rhdh-skitamura-org"
+          app_name: ${{ parameters.app_name }}
+          answer_1: ${{ parameters.answer_1 }}
+          answer_2: ${{ parameters.answer_2 }}
+          owner: "group:rhdh-skitamura-org/skitamura-team"
+          system: "system:default/test-system-github"
+          description: ""
+          cluster_url: "apps.rosa.rosa-hcp-1544.kfnj.p3.openshiftapps.com"
+        targetPath: ./tenant-app
+
+    - id: publish-app
+      name: Publish App Repository to GitHub
+      action: publish:github
+      input:
+        repoUrl: github.com?owner=rhdh-skitamura-org&repo=${{ parameters.app_name }}
+        repoVisibility: public
+        sourcePath: ./tenant-app
+        defaultBranch: develop
+        protectDefaultBranch: false
+    
+    - id: register-to-github
+      name: Registering the Catalog Info Component to GitHub
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish-app-to-github'].output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
+
+    - id: create-argocd-resources
+      name: Create ArgoCD Resources
+      action: argocd:create-resources
+      input:
+        appName: ${{ parameters.app_name }}
+        argoInstance: main
+        namespace: openshift-gitops
+        repoUrl: https://github.com/rhdh-skitamura-org/${{ parameters.app_name }}.git
+        path: 'argocd/'
+
+  output:
+    links:
+      - title: Open the Source Code Repository
+        url: ${{ steps['publish-app-to-github'].output.remoteUrl }}
+      - title: Open the Catalog Info Component
+        icon: catalog
+        entityRef: ${{ steps['register-to-github'].output.entityRef }}
