@@ -1,0 +1,33 @@
+name: Commit and Push Changes
+
+on:
+  repository_dispatch:
+    types: [repository_created]
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'  # 必要に応じてNode.jsのバージョンを指定
+
+    - name: Modify index.ts
+      run: |
+        sed -i 's/Hello World!/Hello World!!!!!/g' app/src/index.ts
+      
+    - name: Commit changes
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add app/src/index.ts
+        git commit -m "Updated greeting message in index.ts"
+      
+    - name: Push changes
+      run: |
+        git push origin HEAD:develop
