@@ -1,8 +1,7 @@
 name: Commit and Push Changes
 
 on:
-  repository_dispatch:
-    types: [repository_created]
+  workflow_dispatch:
 
 jobs:
   update-index:
