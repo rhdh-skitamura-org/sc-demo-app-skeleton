@@ -49,7 +49,7 @@ spec:
         copyWithoutTemplating:
           - .github/workflows/
         values:
-          namespace: "sc-demo"
+          namespace: "sc-demo-test-6"
           git: "github"
           git_host_url: "github.com"
           git_owner_name: "rhdh-skitamura-org"
