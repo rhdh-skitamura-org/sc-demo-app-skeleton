@@ -89,6 +89,14 @@ spec:
         repoUrl: https://github.com/rhdh-skitamura-org/${{ parameters.app_name }}.git
         path: 'manifest/argocd/'
 
+    - id: github-dispatch
+      name: GitHub Actions dispatch
+      action: github:actions:dispatch
+      input:
+        repoUrl: github.com?owner=rhdh-skitamura-org&repo=${{ parameters.app_name }}
+        workflowId: initial-commit.yaml
+        branchOrTagName: develop
+
   output:
     links:
       - title: Open the Source Code Repository
