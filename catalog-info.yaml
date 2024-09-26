@@ -6,7 +6,7 @@ metadata:
   description: ${{ values.description }}
   {%- endif %}
   links:
-  - url: https://openshift-gitops-server-openshift-gitops.${{ values.cluster_url }}/applications/openshift-gitops/${{ values.app_name }}
+  - url: https://openshift-gitops-server-openshift-gitops.${{ values.cluster_url }}/applications/openshift-gitops/${{ values.app_name }}-app
     title: ArgoCD
     icon: dashboard
   - url: https://${{ values.app_name }}-${{ values.app_name }}.${{ values.cluster_url }}
