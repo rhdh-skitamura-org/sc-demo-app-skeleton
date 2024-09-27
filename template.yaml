@@ -39,6 +39,10 @@ spec:
           enumNames:
             - Inner Loop
             - Outer Loop
+        namespace:
+          title: namespace
+          type: string
+          default: "sc-demo-test-7"
       
   steps:
     - id: app-template
@@ -49,7 +53,7 @@ spec:
         copyWithoutTemplating:
           - .github/workflows/
         values:
-          namespace: "sc-demo-test-6"
+          namespace: ${{ parameters.namespace }}
           git: "github"
           git_host_url: "github.com"
           git_owner_name: "rhdh-skitamura-org"
