@@ -8,7 +8,7 @@ spec:
     - bindings:
         - ref: ${{ values.app_name }}-trigger-binding
       template:
-        ref: ${{ values.namespace }}-pipeline-template
+        ref: ${{ values.app_name }}-pipeline-template
       interceptors:
       - ref:
           name: ${{ values.git }}
