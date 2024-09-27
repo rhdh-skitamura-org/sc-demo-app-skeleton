@@ -93,6 +93,12 @@ spec:
         repoUrl: https://github.com/rhdh-skitamura-org/${{ parameters.app_name }}.git
         path: 'manifest/argocd/'
 
+    - id: wait
+      name: Wait
+      action: debug:wait
+      input:
+        seconds: 20
+
     - id: github-dispatch
       name: GitHub Actions dispatch
       action: github:actions:dispatch
