@@ -14,5 +14,6 @@ resources:
   - eventlistener.yaml 
   - el-route.yaml
   - triggerbinding.yaml
+  - triggertemplate.yaml
   - webhook-playbook-config.yaml
   - job-create-webhook.yaml
