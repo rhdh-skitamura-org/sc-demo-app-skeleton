@@ -8,7 +8,7 @@ spec:
       description: The application name
     - name: git-app-rev
       description: The git revision
-      default: develop
+      default: main
     - name: git-app-url
       description: The app git repository url
     - name: git-user
