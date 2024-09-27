@@ -16,7 +16,7 @@ metadata:
     title: App Repository
     icon: dashboard
   annotations:
-    argocd/app-selector: argocd.argoproj.io/instance=${{ values.app_name }}-app
+    argocd/app-selector: argocd.argoproj.io/instance=${{ values.app_name }}
     tektonci/build-namespace: ${{ values.namespace }}
     backstage.io/kubernetes-id: ${{ values.app_name }}
     backstage.io/kubernetes-namespace: ${{ values.namespace }}
