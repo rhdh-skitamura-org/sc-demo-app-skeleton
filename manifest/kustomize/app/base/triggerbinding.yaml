@@ -7,7 +7,8 @@ spec:
     - name: app-name
       value: ${{ values.app_name }}
     - name: git-app-rev
-      value: $(body.head_commit.id)
+      #value: $(body.head_commit.id)
+      value: main
     - name: git-app-url
       value: 'https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.app_name }}'
     - name: git-user
