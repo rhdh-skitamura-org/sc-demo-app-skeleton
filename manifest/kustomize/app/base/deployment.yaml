@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: ${{ values.app_name }}
+        answer1: ${{ values.answer_1 }}
+        answer2: ${{ values.answer_2 }}
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
