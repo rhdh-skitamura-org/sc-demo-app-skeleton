@@ -30,6 +30,7 @@ spec:
           enumNames:
             - Inner Loop
             - Outer Loop
+          ui:widget: radio
         answer_2:
           title: 【問題２】ほげほげ
           type: string
@@ -39,6 +40,7 @@ spec:
           enumNames:
             - Inner Loop
             - Outer Loop
+          ui:widget: radio
         namespace:
           title: namespace
           type: string
