@@ -2,8 +2,8 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: summit-connect-app-template
-  title: Summit Connect Demo Application
-  description: Provides the sample code and deploy a sample application on OpenShift. 
+  title: Summit Connect デモアプリケーション
+  description: セキュリティの問題に回答してアプリをデプロイしてみよう！ 
   tags:
     - recommended
 spec:
@@ -11,7 +11,7 @@ spec:
   type: service
 
   parameters:
-    - title: セキュリティの問題に回答してアプリをデプロイしてみよう！
+    - title: Input
       required:
         - app_name
         - answer_1
