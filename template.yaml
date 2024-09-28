@@ -22,7 +22,7 @@ spec:
           type: string
           default: "redhat-taro"
         answer_1:
-          title: 【問題１】ほげほげ
+          title: 【問題１】コードの変更をローカル環境で頻繁にビルド・テストし、すばやくフィードバックを得る開発サイクルは？
           type: string
           enum:
             - innerloop
@@ -32,7 +32,7 @@ spec:
             - Outer Loop
           ui:widget: radio
         answer_2:
-          title: 【問題２】ほげほげ
+          title: 【問題２】CI/CDパイプラインにおいて、コードがテスト環境や本番環境にデプロイされ、継続的にモニタリングとフィードバックが行われるプロセスは？
           type: string
           enum:
             - innerloop
