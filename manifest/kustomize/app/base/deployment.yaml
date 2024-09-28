@@ -16,7 +16,7 @@ spec:
         app: ${{ values.app_name }}
         answer1: ${{ values.answer_1 }}
         answer2: ${{ values.answer_2 }}
-        kubecraft: true
+        kubecraft: "true"
       annotations:
         sidecar.istio.io/inject: "true"
     spec:
