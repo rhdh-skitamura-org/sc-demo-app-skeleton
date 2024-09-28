@@ -64,6 +64,7 @@ spec:
           system: "system:default/test-system-github"
           description: ""
           cluster_url: "apps.rosa.rosa-hcp-1544.kfnj.p3.openshiftapps.com"
+          image_registry: "quay-registry-quay-quay.apps.rosa.rosa-hcp-1544.kfnj.p3.openshiftapps.com/skitamura-quay-org"
         targetPath: ./tenant-app
 
     - id: publish-app

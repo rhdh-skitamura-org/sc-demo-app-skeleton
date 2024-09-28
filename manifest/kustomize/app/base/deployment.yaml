@@ -18,9 +18,10 @@ spec:
         sidecar.istio.io/inject: "true"
     spec:
       containers:
-      - image: ___IMAGE_URL___@___IMAGE_DIGEST___
+      - image: ${{ values.image_registry }}/${{ values.namespace }}/${{ values.app_name }}:latest
         name: ${{ values.app_name }}
         ports:
         - containerPort: 3000
           protocol: TCP
+        imagePullPolicy: Always
       serviceAccountName: ${{ values.app_name }}-sa
