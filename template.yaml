@@ -44,7 +44,7 @@ spec:
         namespace:
           title: namespace
           type: string
-          default: "sc-demo-test-7"
+          default: "sc-demo-test-25"
       
   steps:
     - id: app-template
@@ -96,11 +96,11 @@ spec:
         repoUrl: https://github.com/rhdh-skitamura-org/${{ parameters.app_name }}.git
         path: 'manifest/argocd/'
 
-    - id: wait
-      name: Wait
-      action: debug:wait
-      input:
-        seconds: 20
+#    - id: wait
+#      name: Wait
+#      action: debug:wait
+#      input:
+#        seconds: 20
 
     - id: github-dispatch
       name: GitHub Actions dispatch
