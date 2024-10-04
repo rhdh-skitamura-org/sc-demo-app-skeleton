@@ -17,36 +17,61 @@ jobs:
       with:
         ref: 'main'
 
+    - name: Check for Webhook
+      id: check-webhook
+      run: |
+        REPO_OWNER=$(echo "${GITHUB_REPOSITORY}" | cut -d'/' -f1)
+        REPO_NAME=$(echo "${GITHUB_REPOSITORY}" | cut -d'/' -f2)
+        WEBHOOK_URL="https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/hooks"
+        
+        # Initial webhook check
+        WEBHOOKS_EXIST=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $WEBHOOK_URL | jq '. | length')
+
+        # Loop to retry if no webhooks found
+        RETRY_COUNT=0
+        while [ "$WEBHOOKS_EXIST" -eq 0 ] && [ "$RETRY_COUNT" -lt 5 ]; do
+          echo "No webhooks found, waiting 2 seconds before retrying..."
+          sleep 2
+          WEBHOOKS_EXIST=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $WEBHOOK_URL | jq '. | length')
+          RETRY_COUNT=$((RETRY_COUNT + 1))
+        done
+
+        if [ "$WEBHOOKS_EXIST" -eq 0 ]; then
+          echo "No webhooks found after retries. Exiting."
+          exit 1
+        else
+          echo "Webhook found, continuing with push."
+        fi
+
     - name: Commit and push if changed
       run: |
         git config user.email "action@github.com"
         git config user.name "actions-user"
-        git commit --allow-empty -m "Trigger Tekton CI" 
+        git commit --allow-empty -m "Trigger Tekton CI"
         git push origin main
-#  update-index:
+#name: Commit and Push Changes
+#
+#on:
+#  workflow_dispatch:
+#
+#permissions:
+#  actions: write
+#  checks: write
+#  contents: write
+#
+#jobs:
+#  trigger-ci:
 #    runs-on: ubuntu-latest
-#
 #    steps:
-#    - name: Checkout repository
+#    - name: Checkout
 #      uses: actions/checkout@v3
-#      
-#    - name: Set up Node.js
-#      uses: actions/setup-node@v4
 #      with:
-#        node-version: 'latest'
+#        ref: 'main'
 #
-#    - name: Modify index.ts
+#    - name: Commit and push if changed
 #      run: |
-#        sed -i 's/Hello World!/Hello World!!!!!/g' app/src/index.ts
-#      
-#    - name: Commit changes
-#      run: |
-#        git config --global user.name 'GitHub Actions'
-#        git config --global user.email 'actions@github.com'
-#        git add app/src/index.ts
-#        git commit -m "Updated greeting message in index.ts"
-#      
-#    - name: Push changes
-#      run: |
-#        git push origin HEAD:main
-
+#        git config user.email "action@github.com"
+#        git config user.name "actions-user"
+#        git commit --allow-empty -m "Trigger Tekton CI" 
+#        git push origin main
+#
