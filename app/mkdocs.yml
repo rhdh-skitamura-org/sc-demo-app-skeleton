@@ -1,6 +1,6 @@
 site_name: ${{ values.app_name }}
 site_description: ${{ values.description }}
-repo_url: https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.app_name }}-app
+repo_url: https://${{ values.git_host_url }}/${{ values.git_group_name }}/${{ values.app_name }}-app
 edit_uri: edit/main/docs
 
 plugins:

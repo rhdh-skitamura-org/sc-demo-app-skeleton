@@ -10,7 +10,7 @@ spec:
       #value: $(body.head_commit.id)
       value: main
     - name: git-app-url
-      value: 'https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.app_name }}'
+      value: 'https://${{ values.git_host_url }}/${{ values.git_group_name }}/${{ values.app_name }}'
     - name: git-user
       value: $(body.pusher.name)
     - name: git-email
