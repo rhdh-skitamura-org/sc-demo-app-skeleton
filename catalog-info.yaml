@@ -12,7 +12,7 @@ metadata:
   - url: https://${{ values.app_name }}-${{ values.namespace }}.${{ values.cluster_url }}
     title: Application
     icon: dashboard
-  - url: https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.app_name }}
+  - url: https://${{ values.git_host_url }}/${{ values.git_group_name }}/${{ values.app_name }}
     title: App Repository
     icon: dashboard
   annotations:
@@ -22,8 +22,8 @@ metadata:
     backstage.io/kubernetes-namespace: ${{ values.namespace }}
     janus-idp.io/tekton-enabled : 'true'
     janus-idp.io/tekton : ${{ values.app_name }}
-    backstage.io/techdocs-ref: url:https://${{ values.git_host_url }}/${{ values.git_owner_name }}/${{ values.app_name }}
-    github.com/project-slug: ${{ values.git_owner_name }}/${{ values.app_name }}
+    backstage.io/techdocs-ref: url:https://${{ values.git_host_url }}/${{ values.git_group_name }}/${{ values.app_name }}
+    github.com/project-slug: ${{ values.git_group_name }}/${{ values.app_name }}
     quay.io/repository-slug: skitamura-quay-org/${{ values.namespace }}/${{ values.app_name }}
 spec:
   type: api 
@@ -32,4 +32,4 @@ spec:
   owner: ${{ values.owner | dump }}
   git: ${{ values.git }}
   git_host_url: ${{ values.git_host_url }}
-  git_owner_name: ${{ values.git_owner_name }}
+  git_group_name: ${{ values.git_group_name }}

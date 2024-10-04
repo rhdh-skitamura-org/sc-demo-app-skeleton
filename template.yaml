@@ -58,11 +58,11 @@ spec:
           namespace: ${{ parameters.namespace }}
           git: "github"
           git_host_url: "github.com"
-          git_owner_name: "rhdh-skitamura-org"
+          git_group_name: "rhdh-skitamura-org"
           app_name: ${{ parameters.app_name }}
           answer_1: ${{ parameters.answer_1 }}
           answer_2: ${{ parameters.answer_2 }}
-          owner: "group:rhdh-skitamura-org/skitamura-team"
+          owner: "user:default/skitamura7446"
           system: "system:default/test-system-github"
           description: ""
           cluster_url: "apps.rosa.rosa-hcp-1544.kfnj.p3.openshiftapps.com"
