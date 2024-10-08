@@ -44,7 +44,7 @@ spec:
         namespace:
           title: namespace
           type: string
-          default: "sc-demo-test-25"
+          default: "sc-demo-001"
       
   steps:
     - id: app-template
